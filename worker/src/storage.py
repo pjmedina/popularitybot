@@ -1,39 +1,18 @@
-# Copyright 2015 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
-
-from redis import StrictRedis
-
+from pymongo import MongoClient
 
 class Storage(object):
     def __init__(self, host=None, port=None, *args, **kwargs):
-        if host is None:
-            host = os.environ.get('REDIS_HOST', 'localhost')
-        if port is None:
-            port = os.environ.get('REDIS_PORT', '6379')
+        self.client = MongoClient()
+        self.db = client.popularitybot_training
 
-        self.redis = StrictRedis(host, port, *args, **kwargs)
+    def add_new_json(self, new_json):
+        new_jsons = self.db.reddit_new_jsons
+        new_json_id = new_jsons.insert_one(new_json).inserted_id
 
-    def add_labels(self, labels):
-        self.redis.sadd('labels', *labels)
+    def add_user_json(self, user_json):
+        user_jsons = self.db.reddit_user_jsons
+        user_json_id = user_jsons.insert_one(user_json).inserted_id
 
-    def add_image(self, image_url, labels):
-        p = self.redis.pipeline()
-
-        for label in labels:
-            p.sadd(label, image_url)
-            p.setnx('repr_img:{}'.format(label), image_url)
-
-        p.execute()
+    def add_vision_to_post(self, post_id, vision_json):
+        new_jsons = self.db.reddit_new_jsons

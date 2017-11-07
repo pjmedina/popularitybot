@@ -1,12 +1,8 @@
 .PHONY: all
-all: redis webapp worker
+all: webapp worker
 
 .PHONY: delete
-delete: delete-redis delete-webapp delete-worker
-
-.PHONY: redis
-redis:
-	$(MAKE) -C redis all
+delete: delete-webapp delete-worker
 
 .PHONY: webapp
 webapp:
@@ -15,10 +11,6 @@ webapp:
 .PHONY: worker
 worker:
 	$(MAKE) -C worker all
-
-.PHONY: delete-redis
-delete-redis:
-	$(MAKE) -C redis delete
 
 .PHONY: delete-webapp
 delete-webapp:
