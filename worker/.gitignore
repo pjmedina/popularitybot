@@ -1,4 +1,3 @@
 env
 *.pyc
-spec.yaml
 vision_credentials.json
