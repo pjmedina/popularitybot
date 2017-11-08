@@ -3,7 +3,7 @@ from pymongo import MongoClient
 try:
     import configparser
 except ImportError as e:
-    import configparser2 as configparser
+    import ConfigParser as configparser
 
 
 class Storage(object):

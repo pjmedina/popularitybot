@@ -1,5 +1,5 @@
 import unittest
-from worker.storage import Storage
+from storage import Storage
 
 
 class TestStorage(unittest.TestCase):
@@ -13,7 +13,7 @@ class TestStorage(unittest.TestCase):
         self.client = self.storage.client
         self.db = self.storage.db
 
-    def ping(self):
+    def test_ping(self):
         ping_result = self.client.db_name.command('ping')
         self.assertEqual(ping_result, "{u'ok': 1.0}")
 
