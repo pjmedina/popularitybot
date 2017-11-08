@@ -1,3 +1,5 @@
 env
 *.pyc
 vision_credentials.json
+reddit_creds.ini
+storage_creds.ini

@@ -1,10 +1,30 @@
 import os
 from pymongo import MongoClient
+try:
+    import configparser
+except ImportError as e:
+    import configparser2 as configparser
+
 
 class Storage(object):
-    def __init__(self, host=None, port=None, *args, **kwargs):
-        self.client = MongoClient()
-        self.db = client.popularitybot_training
+
+    def __init__(self, config_file=None, config_header=None, *args, **kwargs):
+        if config_file is None:
+            config_file = 'storage_creds.ini'
+        if config_header is None:
+            config_header = 'database_info'
+        config = configparser.RawConfigParser()
+        config.read(config_file)
+        username = config.get(config_header, 'username')
+        database_name = config.get(config_header, 'database')
+        password = config.get(config_header, 'password')
+        host = config.get(config_header, 'host')
+        self.client = MongoClient(host,
+                                  user=username,
+                                  password=password,
+                                  authSource=database_name,
+                                  authMechanism='SCRAM-SHA-1')
+        self.db = self.client.get_database()
 
     def add_new_json(self, new_json):
         new_jsons = self.db.reddit_new_jsons
