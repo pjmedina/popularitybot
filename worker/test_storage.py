@@ -1,3 +1,4 @@
+import pprint
 import unittest
 from storage import Storage
 
@@ -14,9 +15,13 @@ class TestStorage(unittest.TestCase):
         self.db = self.storage.db
 
     def test_ping(self):
-        ping_result = self.client.db_name.command('ping')
-        self.assertEqual(ping_result, "{u'ok': 1.0}")
+        ping_result = self.db.command('ping')
+        self.assertEqual(ping_result['ok'], 1.0)
 
+    def test_testdb(self):
+        testdoc = self.db.test
+        record = testdoc.find_one()
+        self.assertEqual(record['test'], "abc123")
 
 if __name__ == '__main__':
     unittest.main()
