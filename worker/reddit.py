@@ -15,7 +15,8 @@
 import requests
 
 _DEFAULT_HEADERS = {
-    'User-Agent': 'googlecloudplatform:vision-sample:v0.0.1 (by /u/jonwayne)'
+    'User-Agent': 'popularitytestbot - Currently crawling for "popularitybot"'
+                  'to predict a meme\'s popularity. Students at the University of Waterloo.'
 }
 
 
