@@ -11,6 +11,7 @@ except ImportError:
     # Python 2.x
     from urllib import quote_plus
 
+
 class Storage(object):
 
     def __init__(self, config_file=None, config_header=None, *args, **kwargs):
@@ -25,9 +26,10 @@ class Storage(object):
         password = config.get(config_header, 'password')
         host = config.get(config_header, 'host')
         print("Connecting to MongoDB with user: " + username)
-        uri = "mongodb://%s:%s@%s/%s?authMechanism=SCRAM-SHA-1" % (quote_plus(username), quote_plus(password), host, database_name)
+        uri = "mongodb://%s:%s@%s/%s?authMechanism=SCRAM-SHA-1" \
+              % (quote_plus(username), quote_plus(password), host, database_name)
         self.client = MongoClient(uri)
-        self.db = self.client.get_database()
+        self.db = self.client.get_database(database_name)
 
     def add_new_json(self, new_json):
         new_jsons = self.db.reddit_new_jsons

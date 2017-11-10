@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import requests
+from time import sleep
 
 _DEFAULT_HEADERS = {
     'User-Agent': 'popularitytestbot - Currently crawling for "popularitybot"'
@@ -20,9 +21,10 @@ _DEFAULT_HEADERS = {
 }
 
 
-def get_hot(subreddit, limit=10, after=None):
+def get_new(subreddit, limit=10, after=None):
+    sleep(2.5)  # ensure we don't GET too frequently or the API will block us
     r = requests.get(
-        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        "https://www.reddit.com/r/{}/new.json".format(subreddit),
         params={
             'limit': limit,
             'raw_json': 1,

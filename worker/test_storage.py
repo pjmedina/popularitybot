@@ -23,5 +23,6 @@ class TestStorage(unittest.TestCase):
         record = testdoc.find_one()
         self.assertEqual(record['test'], "abc123")
 
+
 if __name__ == '__main__':
     unittest.main()

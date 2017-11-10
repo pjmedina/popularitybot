@@ -1,22 +1,28 @@
 import requests
 import reddit
 
-class RedditScraper:
-    def scrape_reddit(self, subreddit, pages=10):
-        print("YOU")
-        after = None
 
-        for _ in range(pages):
-            posts, after = reddit.get_hot(subreddit, limit=10, after=after)
-            print(posts)
-            yield reddit.get_previews(posts)
+class ScrapedRedditPost(object):
+
+    def __init__(self, post, users, image_urls):
+        self.post = post
+        self.users = users
+        self.image_urls = image_urls
 
 
-    def scrape_reddit_task(subreddit, pages=20):
-        for image_urls in scrape_reddit(subreddit, pages):
-            break
+def scrape_reddit(subreddit, pages=20):
+
+    after = None
+
+    for _ in range(pages):
+        posts, after = reddit.get_new(subreddit, limit=10, after=after)
+        image_url = reddit.get_previews(posts)
+        users = None
+        res = ScrapedRedditPost(post=posts, users=users, image_urls=image_url)
+        yield res
 
 
 if __name__ == '__main__':
-    r = RedditScraper()
-    r.scrape_reddit("AdviceAnimals", pages=1)
+    for scraped_info in scrape_reddit(subreddit="AdviceAnimals", pages=1):
+        break
+
