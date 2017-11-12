@@ -13,15 +13,18 @@
 # limitations under the License.
 
 import base64
+import os
 
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
 
-DISCOVERY_URL='https://{api}.googleapis.com/$discovery/rest?version={apiVersion}'
+DISCOVERY_URL = 'https://{api}.googleapis.com/$discovery/rest?version={apiVersion}'
 
 
 class VisionApi(object):
-    def __init__(self):
+    def __init__(self, google_application_credentials_path="client-secret.json"):
+        if os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') != 'True':
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = google_application_credentials_path
         self.vision = self._create_client()
 
     def _create_client(self):
@@ -30,21 +33,34 @@ class VisionApi(object):
             'vision', 'v1', credentials=credentials,
             discoveryServiceUrl=DISCOVERY_URL)
 
-    def detect_labels(self, images, max_results=2, num_retries=3):
-        """Uses the Vision API to detect text in the given file.
+    def detect_image_info(self, image_urls, max_results=10, num_retries=0):
+        """Uses the Vision API for label detection,
+        text detection, web detection, and image properties.
         """
 
         batch_request = []
 
-        for image in images:
+        for image_url in image_urls:
             batch_request.append({
                 'image': {
-                    'content': base64.b64encode(image).decode('UTF-8')
+                    'source': {
+                        'imageUri': image_url
+                    }
                 },
-                'features': [{
-                    'type': 'LABEL_DETECTION',
-                    'maxResults': max_results,
-                }]
+                'features': [
+                    {
+                        'type': 'LABEL_DETECTION'
+                    },
+                    {
+                        'type': 'TEXT_DETECTION'
+                    },
+                    {
+                        'type': 'WEB_DETECTION'
+                    },
+                    {
+                        'type': 'IMAGE_PROPERTIES',
+                    }
+                ]
             })
 
         request = self.vision.images().annotate(
@@ -52,12 +68,13 @@ class VisionApi(object):
 
         response = request.execute(num_retries=num_retries)
 
-        label_responses = []
+        # label_responses = []
 
-        for r in response['responses']:
-            labels = [
-                x['description'] for x in r.get('labelAnnotations', [])]
+        # for r in response['responses']:
+        #     labels = [
+        #         x['description'] for x in r.get('labelAnnotations', [])]
 
-            label_responses.append(labels)
+        #     label_responses.append(labels)
 
-        return label_responses
+        # return label_responses
+        return response

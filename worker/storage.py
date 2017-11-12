@@ -30,14 +30,22 @@ class Storage(object):
               % (quote_plus(username), quote_plus(password), host, database_name)
         self.client = MongoClient(uri)
         self.db = self.client.get_database(database_name)
+        self.users = self.db.reddit_user_jsons
+        self.posts = self.db.reddit_new_jsons
 
-    def add_new_json(self, new_json):
-        new_jsons = self.db.reddit_new_jsons
-        new_json_id = new_jsons.insert_one(new_json).inserted_id
+    def add_reddit_new_posts_json(self, new_json):
+        return self.posts.insert_one(new_json).inserted_id
 
-    def add_user_json(self, user_json):
-        user_jsons = self.db.reddit_user_jsons
-        user_json_id = user_jsons.insert_one(user_json).inserted_id
+    def add_reddit_user_json(self, user_json):
+        if not self.reddit_user_exists(self.get_reddit_username(user_json)):
+            return self.users.insert_one(user_json).inserted_id
+        return None
 
     def add_vision_to_post(self, post_id, vision_json):
         new_jsons = self.db.reddit_new_jsons
+
+    def reddit_user_exists(self, username):
+        return self.users.find({"data.name": username}) != []
+
+    def get_reddit_username(self, user_json):
+        return user_json['data']['name']

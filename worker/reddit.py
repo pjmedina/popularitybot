@@ -14,15 +14,46 @@
 
 import requests
 from time import sleep
+import math
 
 _DEFAULT_HEADERS = {
     'User-Agent': 'popularitytestbot - Currently crawling for "popularitybot"'
                   'to predict a meme\'s popularity. Students at the University of Waterloo.'
 }
 
+default_sleep_time = 2.25
 
-def get_new(subreddit, limit=10, after=None):
-    sleep(2.5)  # ensure we don't GET too frequently or the API will block us
+
+class ScrapedRedditPost(object):
+
+    def __init__(self, posts, user_info, image_urls):
+        self.posts = posts
+        self.user_info = user_info
+        self.image_urls = image_urls
+
+
+def scrape_reddit(subreddit, post_count=100, limit=100, sleep_time=default_sleep_time):
+    if limit is None:
+        limit = 100
+    elif limit > 100 or limit < 1:
+        raise ValueError("Limit range = [1, 100]")
+    if post_count < 1 or post_count > 100000:
+        raise ValueError("Post count range = [1, 100000]")
+    if sleep_time < 2 or sleep_time > 4:
+        raise ValueError("Sleep time range = [2, 4]")
+    pages = int(math.ceil(post_count / limit))
+    after = None
+
+    for _ in range(pages):
+        posts, after = get_new(subreddit, limit=limit, after=after, sleep_time=sleep_time)
+        image_urls = get_previews(posts)
+        user_info = get_user_info(posts, sleep_time=sleep_time)
+        res = ScrapedRedditPost(posts=posts, user_info=user_info, image_urls=image_urls)
+        yield res
+
+
+def get_new(subreddit, limit=100, after=None, sleep_time=default_sleep_time):
+    sleep(sleep_time)  # ensure we don't GET too frequently or the API will block us
     r = requests.get(
         "https://www.reddit.com/r/{}/new.json".format(subreddit),
         params={
@@ -54,3 +85,27 @@ def get_previews(links):
         previews.append(link_preview_images[0]['source']['url'])
 
     return previews
+
+
+def get_user_info(posts, sleep_time=default_sleep_time):
+    user_info = []
+
+    for post in posts:
+        author = post['data'].get('author')
+        user_info.append(get_info_from_author(author=author, sleep_time=sleep_time))
+
+    return user_info
+
+
+def get_info_from_author(author, sleep_time=default_sleep_time):
+    sleep(sleep_time)  # ensure we don't GET too frequently or the API will block us
+    r = requests.get(
+        "https://www.reddit.com/user/{}/about.json".format(author),
+        params={},
+        headers=_DEFAULT_HEADERS)
+
+    r.raise_for_status()
+
+    data = r.json()
+
+    return data

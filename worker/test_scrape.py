@@ -1,6 +1,6 @@
 import unittest
 
-from worker import main_redditscrape
+import reddit
 
 
 class TestScrape(unittest.TestCase):
@@ -8,11 +8,11 @@ class TestScrape(unittest.TestCase):
         super(TestScrape, self).__init__(*args, **kwargs)
 
     def test_scrape_task(self):
-        for scraped_info in main_redditscrape.scrape_reddit(subreddit="AdviceAnimals", pages=1):
+        for scraped_info in reddit.scrape_reddit(subreddit="AdviceAnimals", post_count=1, limit=1):
             self.assertIsNotNone(scraped_info)
-            self.assertIsNotNone(scraped_info.post)
+            self.assertIsNotNone(scraped_info.posts)
             self.assertIsNotNone(scraped_info.image_urls)
-            self.assertIsNotNone(scraped_info.users)
+            self.assertIsNotNone(scraped_info.user_info)
 
 
 if __name__ == '__main__':
