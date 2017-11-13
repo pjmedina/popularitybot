@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import requests
+import logging
 from time import sleep
 import math
 
@@ -31,8 +32,16 @@ class ScrapedRedditPost(object):
         self.user_info = user_info
         self.image_urls = image_urls
 
+    @staticmethod
+    def clean(scraped_info):
+        filtered = ((post, image_url, user_info)
+                    for post, image_url, user_info
+                    in zip(scraped_info.posts, scraped_info.image_urls, scraped_info.user_info)
+                    if post is not None and image_url is not None and user_info is not None)
+        scraped_info.posts, scraped_info.image_urls, scraped_info.user_info = zip(*filtered)
 
-def scrape_reddit(subreddit, post_count: int=100, limit: int=100, sleep_time: float=default_sleep_time):
+
+def scrape_reddit(subreddit, post_count: int=100, after: str=None, limit: int=100, sleep_time: float=default_sleep_time):
     if limit is None:
         limit = 100
     elif limit > 100 or limit < 1:
@@ -42,10 +51,13 @@ def scrape_reddit(subreddit, post_count: int=100, limit: int=100, sleep_time: fl
     if sleep_time < 2 or sleep_time > 4:
         raise ValueError("Sleep time range = [2, 4]")
     pages = int(math.ceil(post_count / limit))
-    after = None
 
     for _ in range(pages):
-        posts, after = get_new(subreddit, limit=limit, after=after, sleep_time=sleep_time)
+        try:
+            posts, after = get_new(subreddit, limit=limit, after=after, sleep_time=sleep_time)
+        except requests.exceptions.HTTPError as e:
+            logging.error("{}: {} - Get new json failed.", e.errno, e.response)
+            yield None
         image_urls = get_previews(posts)
         user_info = get_user_info(posts, sleep_time=sleep_time)
         res = ScrapedRedditPost(posts=posts, user_info=user_info, image_urls=image_urls)
@@ -54,6 +66,7 @@ def scrape_reddit(subreddit, post_count: int=100, limit: int=100, sleep_time: fl
 
 def get_new(subreddit, limit: int=100, after=None, sleep_time: float=default_sleep_time):
     sleep(sleep_time)  # ensure we don't GET too frequently or the API will block us
+    logging.debug('Reddit new json: <sub: {}, after: {}>'.format(subreddit, after))
     r = requests.get(
         "https://www.reddit.com/r/{}/new.json".format(subreddit),
         params={
@@ -80,6 +93,7 @@ def get_previews(links):
         link_preview_images = link['data'].get('preview', {}).get('images', [])
 
         if not link_preview_images:
+            previews.append(None)  # inserting null keeps the place of the image
             continue
 
         previews.append(link_preview_images[0]['source']['url'])
@@ -96,12 +110,19 @@ def get_user_info(posts, sleep_time: float=default_sleep_time):
 
     for post in posts:
         author = post.get('data').get('author')
-        user_info.append(get_info_from_author(author=author, sleep_time=sleep_time))
-
+        try:
+            author_data = get_info_from_author(author=author, sleep_time=sleep_time)
+            user_info.append(author_data)
+        except requests.exceptions.HTTPError:
+            user_info.append(None)
+        except ValueError:
+            user_info.append(None)
     return user_info
 
 
 def get_info_from_author(author: str, sleep_time: float=default_sleep_time):
+    if author == "[deleted]":
+        raise ValueError("Author is deleted.")
     sleep(sleep_time)  # ensure we don't GET too frequently or the API will block us
     r = requests.get(
         "https://www.reddit.com/user/{}/about.json".format(author),
