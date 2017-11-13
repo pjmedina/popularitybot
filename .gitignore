@@ -1,6 +1,9 @@
 # Service account JSON key, used in Travis
 client-secret.json
 
+# Don't commit logs
+logs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
