@@ -28,7 +28,7 @@ def main_args(argv):
     main(subreddit, post_count, limit)
 
 
-def main(subreddit, post_count, limit=None):
+def main(subreddit: str, post_count: int, limit: int=None):
     if subreddit is None or post_count is None:
         print('main.py -s <subreddit> -p <post_count> (optional: -l <limit>)')
         sys.exit()
