@@ -32,7 +32,7 @@ class ScrapedRedditPost(object):
         self.image_urls = image_urls
 
 
-def scrape_reddit(subreddit, post_count=100, limit=100, sleep_time=default_sleep_time):
+def scrape_reddit(subreddit, post_count: int=100, limit: int=100, sleep_time: float=default_sleep_time):
     if limit is None:
         limit = 100
     elif limit > 100 or limit < 1:
@@ -52,7 +52,7 @@ def scrape_reddit(subreddit, post_count=100, limit=100, sleep_time=default_sleep
         yield res
 
 
-def get_new(subreddit, limit=100, after=None, sleep_time=default_sleep_time):
+def get_new(subreddit, limit: int=100, after=None, sleep_time: float=default_sleep_time):
     sleep(sleep_time)  # ensure we don't GET too frequently or the API will block us
     r = requests.get(
         "https://www.reddit.com/r/{}/new.json".format(subreddit),
@@ -91,7 +91,7 @@ def get_post_id(post):
     return post.get('data').get('id')
 
 
-def get_user_info(posts, sleep_time=default_sleep_time):
+def get_user_info(posts, sleep_time: float=default_sleep_time):
     user_info = []
 
     for post in posts:
@@ -101,7 +101,7 @@ def get_user_info(posts, sleep_time=default_sleep_time):
     return user_info
 
 
-def get_info_from_author(author, sleep_time=default_sleep_time):
+def get_info_from_author(author: str, sleep_time: float=default_sleep_time):
     sleep(sleep_time)  # ensure we don't GET too frequently or the API will block us
     r = requests.get(
         "https://www.reddit.com/user/{}/about.json".format(author),
