@@ -22,10 +22,10 @@ def main_args(argv):
         elif opt in ("-s", "--subreddit"):
             subreddit = arg
         elif opt in ("-p", "--post_count"):
-            post_count = arg
+            post_count = int(arg)
         elif opt in ("-l", "--limit"):
-            limit = arg
-    main(subreddit, int(post_count), int(limit))
+            limit = int(arg)
+    main(subreddit, post_count, limit)
 
 
 def main(subreddit: str, post_count: int, limit: int=None):
