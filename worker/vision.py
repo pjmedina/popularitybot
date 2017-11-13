@@ -44,7 +44,7 @@ class VisionApi(object):
         for iurls in split_image_urls:
             batch_request = []
 
-            for image_url in image_urls:
+            for image_url in iurls:
                 batch_request.append({
                     'image': {
                         'source': {
@@ -86,10 +86,9 @@ class VisionApi(object):
             except KeyError:
                 print("Key doesn't exist")
             if merged_response is None:
-                merged_response = json.loads(response)
+                merged_response = response
             else:
-                response = json.loads(response)
-                merged_response['response'].append(response['response'])
+                merged_response['responses'].append(response['responses'])
         # label_responses = []
 
         # for r in response['responses']:
@@ -99,7 +98,7 @@ class VisionApi(object):
         #     label_responses.append(labels)
 
         # return label_responses
-        return json.dumps(merged_response)
+        return merged_response
 
     def split(self, arr, size):
         arrs = []
