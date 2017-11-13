@@ -29,6 +29,9 @@ class TestStorage(unittest.TestCase):
         record = testdoc.find_one()
         self.assertEqual(record['test'], "abc123")
 
+    def test_user_exists(self):
+        self.assertTrue(self.storage.reddit_user_exists("terpin"))
+
     def test_scrape_storage(self):
         for scraped_info in reddit.scrape_reddit(subreddit="AdviceAnimals", post_count=1, limit=1):
             self.storage.add_reddit_scraped_info(scraped_info)

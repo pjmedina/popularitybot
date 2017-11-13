@@ -58,7 +58,8 @@ class Storage(object):
         return self.vision_collection.insert_one(vision_json).inserted_id
 
     def reddit_user_exists(self, username):
-        return self.user_collection.find({"data.name": username}) != []
+        found_user = self.user_collection.find_one({"data.name": username})
+        return found_user is not None
 
     def get_reddit_username(self, user_json):
         return user_json['data']['name']
