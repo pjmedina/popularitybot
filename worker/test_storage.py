@@ -33,8 +33,8 @@ class TestStorage(unittest.TestCase):
         for scraped_info in reddit.scrape_reddit(subreddit="AdviceAnimals", post_count=1, limit=1):
             self.storage.add_reddit_scraped_info(scraped_info)
 
-            images_info_response = self.vision.detect_images_info(scraped_info.image_urls)
-            for post, image_url, image_info in zip(scraped_info.posts, scraped_info.image_urls, images_info_response):
+            vision_res = self.vision.detect_images_info(scraped_info.image_urls)
+            for post, image_url, image_info in zip(scraped_info.posts, scraped_info.image_urls, vision_res['responses']):
                 self.storage.add_vision_info(reddit.get_post_id(post), image_url=image_url, vision_json=image_info)
 
 
