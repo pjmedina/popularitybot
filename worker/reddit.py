@@ -95,7 +95,7 @@ def get_user_info(posts, sleep_time: float=default_sleep_time):
     user_info = []
 
     for post in posts:
-        author = post['data'].get('author')
+        author = post.get('data').get('author')
         user_info.append(get_info_from_author(author=author, sleep_time=sleep_time))
 
     return user_info
