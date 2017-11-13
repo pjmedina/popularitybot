@@ -1,5 +1,6 @@
 import unittest
 import reddit
+from vision import VisionApi
 from storage import Storage
 
 
@@ -15,6 +16,7 @@ class TestStorage(unittest.TestCase):
                                new_collection_name='test_new_jsons',
                                user_collection_name='test_user_jsons',
                                vision_collection_name='test_vision_info')
+        self.vision = VisionApi()
         self.client = self.storage.client
         self.db = self.storage.db
 
@@ -30,6 +32,10 @@ class TestStorage(unittest.TestCase):
     def test_scrape_storage(self):
         for scraped_info in reddit.scrape_reddit(subreddit="AdviceAnimals", post_count=1, limit=1):
             self.storage.add_reddit_scraped_info(scraped_info)
+
+            images_info_response = self.vision.detect_images_info(scraped_info.image_urls)
+            for post, image_url, image_info in zip(scraped_info.posts, scraped_info.image_urls, images_info_response):
+                self.storage.add_vision_info(reddit.get_post_id(post), image_url=image_url, vision_json=image_info)
 
 
 if __name__ == '__main__':
