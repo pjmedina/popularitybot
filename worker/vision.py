@@ -49,7 +49,8 @@ class VisionApi(object):
                 },
                 'features': [
                     {
-                        'type': 'LABEL_DETECTION'
+                        'type': 'LABEL_DETECTION',
+                        'maxResults': max_results
                     },
                     {
                         'type': 'TEXT_DETECTION'
@@ -67,7 +68,14 @@ class VisionApi(object):
             body={'requests': batch_request})
 
         response = request.execute(num_retries=num_retries)
-
+        # we don't need the bounding blocks, which take up a ton of space
+        try:
+            res = response.get('responses', [])
+            for r in res:
+                for page in r.get('fullTextAnnotation').get('pages'):
+                    del page['blocks']
+        except KeyError:
+            print("Key doesn't exist")
         # label_responses = []
 
         # for r in response['responses']:
