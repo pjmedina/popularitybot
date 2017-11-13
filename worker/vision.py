@@ -14,6 +14,7 @@
 
 import base64
 import os
+import logging
 
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
@@ -72,8 +73,13 @@ class VisionApi(object):
         try:
             res = response.get('responses', [])
             for r in res:
-                for page in r.get('fullTextAnnotation').get('pages'):
-                    del page['blocks']
+                ft = r.get('fullTextAnnotation')
+                if ft is not None:
+                    for page in ft.get('pages'):
+                        if page is not None:
+                            del page['blocks']
+                else:
+                    logging.INFO("Did not have fullTextAnnotation: {}".format(r))
         except KeyError:
             print("Key doesn't exist")
         # label_responses = []
@@ -86,3 +92,12 @@ class VisionApi(object):
 
         # return label_responses
         return response
+
+    def split(self, arr, size):
+        arrs = []
+        while len(arr) > size:
+            pice = arr[:size]
+            arrs.append(pice)
+            arr = arr[size:]
+        arrs.append(arr)
+        return arrs

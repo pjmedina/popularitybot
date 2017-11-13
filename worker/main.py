@@ -52,7 +52,7 @@ def main(subreddit: str, post_count: int, limit: int=None, after: str=None, log_
         level = logging.DEBUG
     else:
         level = "INFO"
-    log_file_name = datetime.now().strftime('popularitybot_%H_%M_%d_%m_%Y_{}.log'.format(log_level))
+    log_file_name = datetime.now().strftime('../logs/popularitybot_%H_%M_%d_%m_%Y_{}.log'.format(log_level))
     logging.basicConfig(filename=log_file_name, level=level, format='%(asctime)s %(message)s')
 
     # init vision and storage
