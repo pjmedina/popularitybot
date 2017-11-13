@@ -15,7 +15,12 @@ except ImportError:
 
 class Storage(object):
 
-    def __init__(self, config_file=None, config_header=None, *args, **kwargs):
+    def __init__(self,
+                 config_file=None, config_header=None,
+                 user_collection_name="reddit_user_jsons",
+                 new_collection_name="reddit_new_jsons",
+                 vision_collection_name="reddit_vision_info",
+                 *args, **kwargs):
         if config_file is None:
             config_file = 'storage_creds.ini'
         if config_header is None:
@@ -31,17 +36,18 @@ class Storage(object):
               % (quote_plus(username), quote_plus(password), host, database_name)
         self.client = MongoClient(uri)
         self.db = self.client.get_database(database_name)
-        self.users = self.db.reddit_user_jsons
-        self.posts = self.db.reddit_new_jsons
+        self.user_collection = self.db[user_collection_name]
+        self.post_collection = self.db[new_collection_name]
+        self.vision_collection = self.db[vision_collection_name]
 
     def add_reddit_scraped_info(self, scraped_info: ScrapedRedditPost):
         for user_info in scraped_info.user_info:
             self.add_reddit_user_json(user_info)
-        self.posts.insertMany(scraped_info.posts)
+        self.post_collection.insertMany(scraped_info.posts)
 
     def add_reddit_user_json(self, user_json):
         if not self.reddit_user_exists(self.get_reddit_username(user_json)):
-            return self.users.insert_one(user_json).inserted_id
+            return self.user_collection.insert_one(user_json).inserted_id
         return None
 
     def add_vision_info(self, post_id, image_url, vision_json):
@@ -49,10 +55,10 @@ class Storage(object):
             vision_json['reddit_id'] = post_id
         if not vision_json['image_url']:
             vision_json['image_url'] = image_url
-        return self.db.reddit_vision_info.insert_one(vision_json).inserted_id
+        return self.vision_collection.insert_one(vision_json).inserted_id
 
     def reddit_user_exists(self, username):
-        return self.users.find({"data.name": username}) != []
+        return self.user_collection.find({"data.name": username}) != []
 
     def get_reddit_username(self, user_json):
         return user_json['data']['name']
