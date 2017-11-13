@@ -4,7 +4,7 @@ import getopt
 import logging
 from datetime import datetime
 import reddit
-from worker.reddit import ScrapedRedditPost
+from reddit import ScrapedRedditPost
 
 from storage import Storage
 from vision import VisionApi
