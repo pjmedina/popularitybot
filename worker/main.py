@@ -6,7 +6,7 @@ from storage import Storage
 from vision import VisionApi
 
 
-def main(argv):
+def main_args(argv):
     subreddit = None
     post_count = None
     limit = None
@@ -25,10 +25,13 @@ def main(argv):
             post_count = arg
         elif opt in ("-l", "--limit"):
             limit = arg
+    main(subreddit, post_count, limit)
+
+
+def main(subreddit, post_count, limit=None):
     if subreddit is None or post_count is None:
         print('main.py -s <subreddit> -p <post_count> (optional: -l <limit>)')
         sys.exit()
-
     vision = VisionApi()
     storage = Storage()
 
@@ -56,4 +59,4 @@ def get_label_info(vision, storage, image_urls):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main_args(sys.argv[1:])
