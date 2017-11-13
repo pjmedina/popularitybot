@@ -11,9 +11,9 @@ def main_args(argv):
     post_count = None
     limit = None
     try:
-        opts, args = getopt.getopt(argv, "hs:p:", ["subreddit=", "post_count="])
+        opts, args = getopt.getopt(argv, "hs:p:l:", ["subreddit=", "post_count=", "limit="])
     except getopt.GetoptError:
-        print('main.py -s <subreddit> -p <post_count>')
+        print('main.py -s <subreddit> -p <post_count> (optional: -l <limit>)')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
@@ -25,7 +25,7 @@ def main_args(argv):
             post_count = arg
         elif opt in ("-l", "--limit"):
             limit = arg
-    main(subreddit, post_count, limit)
+    main(subreddit, int(post_count), int(limit))
 
 
 def main(subreddit: str, post_count: int, limit: int=None):
