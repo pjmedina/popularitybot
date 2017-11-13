@@ -43,7 +43,7 @@ class Storage(object):
     def add_reddit_scraped_info(self, scraped_info: ScrapedRedditPost):
         for user_info in scraped_info.user_info:
             self.add_reddit_user_json(user_info)
-        self.post_collection.insertMany(scraped_info.posts)
+        self.post_collection.insert_many(scraped_info.posts)
 
     def add_reddit_user_json(self, user_json):
         if not self.reddit_user_exists(self.get_reddit_username(user_json)):
