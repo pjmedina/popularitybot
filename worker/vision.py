@@ -15,6 +15,7 @@
 import base64
 import os
 import logging
+import json
 
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
@@ -38,50 +39,57 @@ class VisionApi(object):
         """Uses the Vision API for label detection,
         text detection, web detection, and image properties.
         """
+        merged_response = None
+        split_image_urls = self.split(image_urls, 16)
+        for iurls in split_image_urls:
+            batch_request = []
 
-        batch_request = []
-
-        for image_url in image_urls:
-            batch_request.append({
-                'image': {
-                    'source': {
-                        'imageUri': image_url
-                    }
-                },
-                'features': [
-                    {
-                        'type': 'LABEL_DETECTION',
-                        'maxResults': max_results
+            for image_url in image_urls:
+                batch_request.append({
+                    'image': {
+                        'source': {
+                            'imageUri': image_url
+                        }
                     },
-                    {
-                        'type': 'TEXT_DETECTION'
-                    },
-                    {
-                        'type': 'WEB_DETECTION'
-                    },
-                    {
-                        'type': 'IMAGE_PROPERTIES',
-                    }
-                ]
-            })
+                    'features': [
+                        {
+                            'type': 'LABEL_DETECTION',
+                            'maxResults': max_results
+                        },
+                        {
+                            'type': 'TEXT_DETECTION'
+                        },
+                        {
+                            'type': 'WEB_DETECTION'
+                        },
+                        {
+                            'type': 'IMAGE_PROPERTIES',
+                        }
+                    ]
+                })
 
-        request = self.vision.images().annotate(
-            body={'requests': batch_request})
+            request = self.vision.images().annotate(
+                body={'requests': batch_request})
 
-        response = request.execute(num_retries=num_retries)
-        # we don't need the bounding blocks, which take up a ton of space
-        try:
-            res = response.get('responses', [])
-            for r in res:
-                ft = r.get('fullTextAnnotation')
-                if ft is not None:
-                    for page in ft.get('pages'):
-                        if page is not None:
-                            del page['blocks']
-                else:
-                    logging.INFO("Did not have fullTextAnnotation: {}".format(r))
-        except KeyError:
-            print("Key doesn't exist")
+            response = request.execute(num_retries=num_retries)
+            # we don't need the bounding blocks, which take up a ton of space
+            try:
+                res = response.get('responses', [])
+                for r in res:
+                    ft = r.get('fullTextAnnotation')
+                    if ft is not None:
+                        for page in ft.get('pages'):
+                            if page is not None:
+                                del page['blocks']
+                    else:
+                        logging.INFO("Did not have fullTextAnnotation: {}".format(r))
+            except KeyError:
+                print("Key doesn't exist")
+            if merged_response is None:
+                merged_response = json.loads(response)
+            else:
+                response = json.loads(response)
+                merged_response['response'].append(response['response'])
         # label_responses = []
 
         # for r in response['responses']:
@@ -91,7 +99,7 @@ class VisionApi(object):
         #     label_responses.append(labels)
 
         # return label_responses
-        return response
+        return json.dumps(merged_response)
 
     def split(self, arr, size):
         arrs = []
