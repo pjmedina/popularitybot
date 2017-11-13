@@ -87,6 +87,10 @@ def get_previews(links):
     return previews
 
 
+def get_post_id(post):
+    return post.get('data').get('id')
+
+
 def get_user_info(posts, sleep_time=default_sleep_time):
     user_info = []
 

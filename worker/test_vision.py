@@ -8,7 +8,7 @@ class TestVision(unittest.TestCase):
 
     def test_detect_vision_info(self):
         vision = VisionApi()
-        res = vision.detect_image_info(["https://i.redditmedia.com/sJHMQO41DlIqI6pT2HpAwkzuniaBFXBaIvqrlrx_8KA.jpg"])
+        res = vision.detect_images_info(["https://i.redditmedia.com/sJHMQO41DlIqI6pT2HpAwkzuniaBFXBaIvqrlrx_8KA.jpg"])
         self.assertIsNotNone(res)
         self.assertNotEqual(res, [])
 
