@@ -35,9 +35,10 @@ def main(argv):
     # scrape reddit
     for scraped_info in reddit.scrape_reddit(subreddit="AdviceAnimals", post_count=post_count, limit=limit):
         # now pass in the image urls into the vision api
-        image_info_response = vision.detect_image_info(scraped_info.image_urls)
-        # for image_url, labels in zip(scraped_info.image_urls, labels_response):
-
+        images_info_response = vision.detect_images_info(scraped_info.image_urls)
+        storage.add_reddit_scraped_info(scraped_info)
+        for post, image_url, image_info in zip(scraped_info.posts, scraped_info.image_urls, images_info_response):
+            storage.add_vision_info(reddit.get_post_id(post), image_url=image_url, vision_json=image_info)
 
 
 # def download_image(image_url):

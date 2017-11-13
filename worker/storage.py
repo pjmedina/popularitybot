@@ -1,5 +1,6 @@
 import os
 from pymongo import MongoClient
+from reddit import ScrapedRedditPost
 try:
     import configparser
 except ImportError as e:
@@ -33,16 +34,22 @@ class Storage(object):
         self.users = self.db.reddit_user_jsons
         self.posts = self.db.reddit_new_jsons
 
-    def add_reddit_new_posts_json(self, new_json):
-        return self.posts.insert_one(new_json).inserted_id
+    def add_reddit_scraped_info(self, scraped_info: ScrapedRedditPost):
+        for user_info in scraped_info.user_info:
+            self.add_reddit_user_json(user_info)
+        self.posts.insertMany(scraped_info.posts)
 
     def add_reddit_user_json(self, user_json):
         if not self.reddit_user_exists(self.get_reddit_username(user_json)):
             return self.users.insert_one(user_json).inserted_id
         return None
 
-    def add_vision_to_post(self, post_id, vision_json):
-        new_jsons = self.db.reddit_new_jsons
+    def add_vision_info(self, post_id, image_url, vision_json):
+        if not vision_json['reddit_id']:
+            vision_json['reddit_id'] = post_id
+        if not vision_json['image_url']:
+            vision_json['image_url'] = image_url
+        return self.db.reddit_vision_info.insert_one(vision_json).inserted_id
 
     def reddit_user_exists(self, username):
         return self.users.find({"data.name": username}) != []

@@ -10,7 +10,6 @@ class TestVision(unittest.TestCase):
     def test_detect_vision_info(self):
         vision = VisionApi()
         res = vision.detect_image_info(["https://i.redd.it/zr11w62i4mxz.png"])
-        pprint.pprint(res)
         self.assertIsNotNone(res)
         self.assertNotEqual(res, [])
 

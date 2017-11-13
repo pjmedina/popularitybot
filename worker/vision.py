@@ -33,7 +33,7 @@ class VisionApi(object):
             'vision', 'v1', credentials=credentials,
             discoveryServiceUrl=DISCOVERY_URL)
 
-    def detect_image_info(self, image_urls, max_results=10, num_retries=0):
+    def detect_images_info(self, image_urls, max_results=10, num_retries=0):
         """Uses the Vision API for label detection,
         text detection, web detection, and image properties.
         """
