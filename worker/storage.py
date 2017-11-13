@@ -51,9 +51,9 @@ class Storage(object):
         return None
 
     def add_vision_info(self, post_id, image_url, vision_json):
-        if not vision_json['reddit_id']:
+        if 'reddit_id' not in vision_json:
             vision_json['reddit_id'] = post_id
-        if not vision_json['image_url']:
+        if 'image_url' not in vision_json:
             vision_json['image_url'] = image_url
         return self.vision_collection.insert_one(vision_json).inserted_id
 
