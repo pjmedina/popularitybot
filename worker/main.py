@@ -44,19 +44,5 @@ def main(subreddit, post_count, limit=None):
             storage.add_vision_info(reddit.get_post_id(post), image_url=image_url, vision_json=image_info)
 
 
-# def download_image(image_url):
-#     r = requests.get(image_url)
-#     r.raise_for_status()
-#     return r.content
-
-
-def get_label_info(vision, storage, image_urls):
-    # image_contents = [
-    #     download_image(image_url)
-    #     for image_url
-    #     in image_urls]
-    return
-
-
 if __name__ == "__main__":
     main_args(sys.argv[1:])
