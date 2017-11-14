@@ -82,13 +82,15 @@ class VisionApi(object):
                             if page is not None:
                                 del page['blocks']
                     else:
-                        logging.INFO("Did not have fullTextAnnotation: {}".format(r))
+                        logging.info("Did not have fullTextAnnotation: {}".format(r))
             except KeyError:
                 print("Key doesn't exist")
             if merged_response is None:
                 merged_response = response
             else:
-                merged_response['responses'].append(response['responses'])
+                merged_res = merged_response.get('responses')
+                for res_item in response.get('responses'):
+                    merged_res.append(res_item)
         # label_responses = []
 
         # for r in response['responses']:
