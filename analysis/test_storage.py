@@ -33,10 +33,12 @@ class TestStorage(unittest.TestCase):
         name_link_revised = {}
         entries = name_link[:]
         for d in entries:
-            name_link_revised[d['data']['name']] = {"karma": d['data']['link_karma'], "score": -1}
+            if d['data']['link_karma'] < 300000:
+                name_link_revised[d['data']['name']] = {"karma": d['data']['link_karma'], "score": -1}
         entriess = name_score[:]
         for a in entriess:
-            name_link_revised[a['data']['author']]['score'] = a['data']['score']
+            if a['data']['author'] in name_link_revised and a['data']['score'] < 10000:
+                name_link_revised[a['data']['author']]['score'] = a['data']['score']
         with open('abc.json', "w") as file_name:
             json.dump(name_link_revised, file_name)
 
