@@ -16,6 +16,7 @@ import base64
 import os
 import logging
 import json
+from time import time
 
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
@@ -72,10 +73,13 @@ class VisionApi(object):
                 body={'requests': batch_request})
 
             response = request.execute(num_retries=num_retries)
+
+            time_collected = int(time())
             # we don't need the bounding blocks, which take up a ton of space
             try:
                 res = response.get('responses', [])
                 for r in res:
+                    r['time_collected'] = time_collected
                     ft = r.get('fullTextAnnotation')
                     if ft is not None:
                         for page in ft.get('pages'):
