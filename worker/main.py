@@ -69,7 +69,7 @@ def main(subreddit: str, post_count: int, limit: int=None, after: str=None, log_
         ScrapedRedditPost.clean(scraped_info)
         if len(scraped_info.posts) < limit:
             logging.info("Removed {} posts from this scrape.".format(limit-len(scraped_info.posts)))
-        rand_post_id = scraped_info.posts[random.randint(0, len(scraped_info.posts-1))]['data']['id']
+        rand_post_id = scraped_info.posts[random.randint(0, len(scraped_info.posts)-1)]['data']['id']
         if storage.reddit_post_exists(rand_post_id):
             raise RuntimeError("Post already seen. Something is weird.")
         # now pass in the image urls into the vision api
