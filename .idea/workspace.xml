@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="72cfac85-09f4-48a7-8ef8-df16dac7daa5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/full_vision_api.json" afterPath="$PROJECT_DIR$/data/full_vision_api.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/worker/reddit.py" afterPath="$PROJECT_DIR$/worker/reddit.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/worker/storage.py" afterPath="$PROJECT_DIR$/worker/storage.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/worker/vision.py" afterPath="$PROJECT_DIR$/worker/vision.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,14 +22,15 @@
     <SUITE FILE_PATH="coverage/popularitybot$Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape.coverage" NAME="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape Coverage Results" MODIFIED="1510607695966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/worker" />
     <SUITE FILE_PATH="coverage/popularitybot$Unittests_in_test_scrape_py.coverage" NAME="Unittests in test_scrape.py Coverage Results" MODIFIED="1510284983503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/worker" />
     <SUITE FILE_PATH="coverage/popularitybot$main_redditscrape.coverage" NAME="main_redditscrape Coverage Results" MODIFIED="1510275764658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/worker" />
+    <SUITE FILE_PATH="coverage/popularitybot$Unittests_in_test_main_py.coverage" NAME="Unittests in test_main.py Coverage Results" MODIFIED="1510617078421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/worker" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file leaf-file-name="reddit.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/worker/reddit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-117">
-              <caret line="52" column="46" lean-forward="true" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+            <state relative-caret-position="108">
+              <caret line="131" column="33" lean-forward="true" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="33" />
               <folding>
                 <element signature="e#576#591#0" expanded="true" />
               </folding>
@@ -44,25 +48,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="storage.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="storage.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/worker/storage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="54" column="46" lean-forward="true" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
+            <state relative-caret-position="0">
+              <caret line="0" column="9" lean-forward="true" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vision.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/worker/vision.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#598#611#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vision.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/worker/vision.py">
+      <file leaf-file-name="test_vision.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/worker/test_vision.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="101" column="42" lean-forward="false" selection-start-line="101" selection-start-column="42" selection-end-line="101" selection-end-column="42" />
+            <state relative-caret-position="275">
+              <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
               <folding>
-                <element signature="e#598#611#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,11 +97,33 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/worker/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="73" column="62" lean-forward="false" selection-start-line="73" selection-start-column="62" selection-end-line="73" selection-end-column="62" />
+            <state relative-caret-position="233">
+              <caret line="67" column="29" lean-forward="false" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
               <folding>
                 <element signature="e#1#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/worker/test_main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="case.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Anaconda3/envs/conda/Lib/unittest/case.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,6 +145,7 @@
       <find>get_new</find>
       <find>get_user_info</find>
       <find>scrape_reddit</find>
+      <find>time()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,14 +160,16 @@
         <option value="$PROJECT_DIR$/worker/src/storage.py" />
         <option value="$PROJECT_DIR$/worker/main_redditscrape.py" />
         <option value="$PROJECT_DIR$/worker/client-secret.json" />
-        <option value="$PROJECT_DIR$/worker/storage.py" />
         <option value="$PROJECT_DIR$/worker/.idea/test_vision.py" />
         <option value="$PROJECT_DIR$/worker/main_labelimages.py" />
         <option value="$PROJECT_DIR$/worker/test_storage.py" />
         <option value="$PROJECT_DIR$/worker/test_scrape.py" />
-        <option value="$PROJECT_DIR$/worker/reddit.py" />
         <option value="$PROJECT_DIR$/worker/main.py" />
+        <option value="$PROJECT_DIR$/worker/test_vision.py" />
+        <option value="$PROJECT_DIR$/worker/test_main.py" />
         <option value="$PROJECT_DIR$/worker/vision.py" />
+        <option value="$PROJECT_DIR$/worker/reddit.py" />
+        <option value="$PROJECT_DIR$/worker/storage.py" />
       </list>
     </option>
   </component>
@@ -185,7 +224,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_scrape.TestScrape.test_remove_items_from_scrape">
+  <component name="RunManager" selected="Python tests.Unittests in test_main.py">
     <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -231,6 +270,21 @@
       <option name="_new_target" value="&quot;test_storage.TestStorage&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
+    <configuration name="Unittests in test_main.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/worker" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="popularitybot" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/worker/test_main.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
     <configuration name="Unittests in test_scrape.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -246,38 +300,20 @@
       <option name="_new_target" value="&quot;$PROJECT_DIR$/worker/test_scrape.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration name="main_redditscrape" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/worker" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="popularitybot" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/worker/main_redditscrape.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.main_redditscrape" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_scrape.py" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_scrape_task" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_storage.TestStorage" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" />
+      <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_scrape.py" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_scrape_task" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_storage.TestStorage" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_main.py" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_storage.TestStorage" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_scrape_task" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_scrape.py" />
-        <item index="4" class="java.lang.String" itemvalue="Python.main_redditscrape" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_main.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_storage.TestStorage" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_scrape.TestScrape.test_scrape_task" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_scrape.py" />
       </list>
     </recent_temporary>
   </component>
@@ -298,35 +334,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape - 2017.11.13 at 15h 56m 23s.xml">
-      <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape - 2017.11.13 at 15h 57m 27s.xml">
-      <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape - 2017.11.13 at 16h 00m 41s.xml">
-      <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape - 2017.11.13 at 16h 03m 08s.xml">
-      <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape - 2017.11.13 at 16h 04m 57s.xml">
-      <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_scrape_TestScrape_test_remove_items_from_scrape - 2017.11.13 at 16h 15m 25s.xml">
       <configuration name="Unittests for test_scrape.TestScrape.test_remove_items_from_scrape" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scrape_py - 2017.11.09 at 20h 29m 38s.xml">
-      <configuration name="Unittests in test_scrape.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 25m 08s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scrape_py - 2017.11.09 at 20h 30m 17s.xml">
-      <configuration name="Unittests in test_scrape.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 26m 26s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scrape_py - 2017.11.09 at 22h 33m 14s.xml">
-      <configuration name="Unittests in test_scrape.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 27m 35s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scrape_py - 2017.11.09 at 22h 36m 50s.xml">
-      <configuration name="Unittests in test_scrape.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 29m 34s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 30m 06s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 33m 33s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 49m 24s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 50m 20s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_main_py - 2017.11.13 at 18h 58m 58s.xml">
+      <configuration name="Unittests in test_main.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -341,10 +377,10 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32454127" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32912844" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912844" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39908257" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39908257" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -362,7 +398,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
@@ -393,9 +429,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -441,9 +475,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="950">
           <caret line="39" column="52" lean-forward="true" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -498,9 +530,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
           <caret line="39" column="52" lean-forward="true" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -540,9 +570,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -620,13 +648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Anaconda3/envs/conda/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/worker/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -651,21 +672,19 @@
     <entry file="file://$PROJECT_DIR$/worker/main_redditscrape.py" />
     <entry file="file://$PROJECT_DIR$/worker/.idea/test_vision.py" />
     <entry file="file://$PROJECT_DIR$/worker/main_labelimages.py" />
-    <entry file="file://$PROJECT_DIR$/worker/test_storage.py">
+    <entry file="file://C:/Anaconda3/envs/conda/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="40" column="42" lean-forward="false" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
+        <state relative-caret-position="152">
+          <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/worker/storage.py">
+    <entry file="file://C:/Anaconda3/envs/conda/Lib/unittest/loader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="54" column="46" lean-forward="true" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="152">
+          <caret line="162" column="0" lean-forward="false" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -679,33 +698,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/worker/reddit.py">
+    <entry file="file://$PROJECT_DIR$/worker/test_vision.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-117">
-          <caret line="52" column="46" lean-forward="true" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
+        <state relative-caret-position="275">
+          <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
           <folding>
-            <element signature="e#576#591#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/worker/test_storage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="40" column="42" lean-forward="false" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/worker/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="73" column="62" lean-forward="false" selection-start-line="73" selection-start-column="62" selection-end-line="73" selection-end-column="62" />
+        <state relative-caret-position="233">
+          <caret line="67" column="29" lean-forward="false" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
           <folding>
             <element signature="e#1#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/worker/test_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/worker/vision.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="101" column="42" lean-forward="false" selection-start-line="101" selection-start-column="42" selection-end-line="101" selection-end-column="42" />
+        <state relative-caret-position="171">
+          <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
           <folding>
             <element signature="e#598#611#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/worker/reddit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="131" column="33" lean-forward="true" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="33" />
+          <folding>
+            <element signature="e#576#591#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/worker/storage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="9" lean-forward="true" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>

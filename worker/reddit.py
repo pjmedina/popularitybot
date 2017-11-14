@@ -14,7 +14,7 @@
 
 import requests
 import logging
-from time import sleep
+from time import sleep, time
 import math
 
 _DEFAULT_HEADERS = {
@@ -81,6 +81,8 @@ def get_new(subreddit, limit: int=100, after=None, sleep_time: float=default_sle
     data = r.json()
 
     posts = data['data']['children']
+    for post in posts:
+        post['time_collected'] = int(time())
     after = data['data']['after']
 
     return posts, after
@@ -132,5 +134,6 @@ def get_info_from_author(author: str, sleep_time: float=default_sleep_time):
     r.raise_for_status()
 
     data = r.json()
+    data['time_collected'] = int(time())
 
     return data
