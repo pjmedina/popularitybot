@@ -52,12 +52,17 @@ def scrape_reddit(subreddit, post_count: int=100, after: str=None, limit: int=10
         raise ValueError("Sleep time range = [2, 4]")
     pages = int(math.ceil(post_count / limit))
 
+    first_iteration = False
     for _ in range(pages):
+        if not first_iteration and after is None:
+            raise RuntimeError("Seen a None 'after' after the first iteration. Re-reading data.")
         try:
             posts, after = get_new(subreddit, limit=limit, after=after, sleep_time=sleep_time)
         except requests.exceptions.HTTPError as e:
             logging.error("{}: {} - Get new json failed.", e.errno, e.response)
             yield None
+        if first_iteration:
+            first_iteration = False
         image_urls = get_previews(posts)
         user_info = get_user_info(posts, sleep_time=sleep_time)
         res = ScrapedRedditPost(posts=posts, user_info=user_info, image_urls=image_urls)

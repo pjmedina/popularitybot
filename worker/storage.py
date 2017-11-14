@@ -50,6 +50,10 @@ class Storage(object):
             return self.user_collection.insert_one(user_json).inserted_id
         return None
 
+    def reddit_post_exists(self, post_id):
+        found_post = self.post_collection.find_one({'data.id': post_id})
+        return found_post is not None
+
     def add_vision_info(self, post_id, image_url, vision_json):
         if 'reddit_id' not in vision_json:
             vision_json['reddit_id'] = post_id
