@@ -9,6 +9,7 @@ from reddit import ScrapedRedditPost
 
 from storage import Storage
 from vision import VisionApi
+from language import LanguageApi
 
 
 def main_args(argv):
@@ -58,6 +59,7 @@ def main(subreddit: str, post_count: int, limit: int=None, after: str=None, log_
 
     # init vision and storage
     vision = VisionApi()
+    language = LanguageApi()
     storage = Storage()
 
     # scrape reddit
@@ -79,7 +81,16 @@ def main(subreddit: str, post_count: int, limit: int=None, after: str=None, log_
         vision_res = vision.detect_images_info(scraped_info.image_urls)
         storage.add_reddit_scraped_info(scraped_info)
         for post, image_url, image_info in zip(scraped_info.posts, scraped_info.image_urls, vision_res['responses']):
-            storage.add_vision_info(reddit.get_post_id(post), image_url=image_url, vision_json=image_info)
+            reddit_post_id = reddit.get_post_id(post)
+            # sentiment analysis
+            post_title = post['data']['title']
+            post_text = None
+            if 'fullTextAnnotation' in image_info and 'text' in image_info['fullTextAnnotation']:
+                post_text = language.detect_sentiment(image_info['fullTextAnnotation']['text'])
+            language_result = language.get_result_for_storage(reddit_post_id, post_title, post_text)
+            # store results
+            storage.add_vision_info(reddit_post_id, image_url=image_url, vision_json=image_info)
+            storage.add_language_info(language_result)
 
 
 if __name__ == "__main__":

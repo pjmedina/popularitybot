@@ -20,6 +20,7 @@ class Storage(object):
                  user_collection_name="reddit_user_jsons",
                  new_collection_name="reddit_new_jsons",
                  vision_collection_name="reddit_vision_info",
+                 language_collection_name="reddit_language_info",
                  *args, **kwargs):
         if config_file is None:
             config_file = 'storage_creds.ini'
@@ -39,6 +40,7 @@ class Storage(object):
         self.user_collection = self.db[user_collection_name]
         self.post_collection = self.db[new_collection_name]
         self.vision_collection = self.db[vision_collection_name]
+        self.language_collection = self.db[language_collection_name]
 
     def add_reddit_scraped_info(self, scraped_info: ScrapedRedditPost):
         for user_info in scraped_info.user_info:
@@ -61,9 +63,18 @@ class Storage(object):
             vision_json['image_url'] = image_url
         return self.vision_collection.insert_one(vision_json).inserted_id
 
+    def add_language_info(self, language_response):
+        return self.language_collection.insert_one(language_response).inserted_id
+
     def reddit_user_exists(self, username):
         found_user = self.user_collection.find_one({"data.name": username})
         return found_user is not None
 
     def get_reddit_username(self, user_json):
         return user_json['data']['name']
+
+    def get_text_data(self):
+        return self.db.reddit_post_title_and_content.find({})
+
+    def add_temp_language_info(self, language_result):
+        return self.db.language_temp.insert_one(language_result).inserted_id
