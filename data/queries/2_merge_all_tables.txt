@@ -1,0 +1,35 @@
+db.getCollection('reddit_new_user_merged').aggregate([
+    // each Object is an aggregation.
+    {
+        $group: {
+            _id: '$_id',
+            data:  {$first: '$data'},
+            test: {$first: { $arrayElemAt: [ "$test", 0 ] } },
+            time_collected: {$first: '$time_collected'}
+        }
+
+    }, {
+        $project:{
+            _id : '$data.id',
+            post_created: '$data.created',
+            post_domain: '$data.domain',
+            post_downs: '$data.downs',
+            post_gilded: '$data.gilded',
+            post_hide_score: '$data.hide_score',
+            post_is_reddit_media_domain: '$data.is_reddit_media_domain',
+            post_num_comments: '$data.num_comments',
+            post_num_crossposts: '$data.num_crossposts',
+            post_ops: '$data.ops',
+            post_over_18: '$data.over_18',
+            post_score: '$data.score',
+            post_time_collected: '$data.time_collected',
+            user_comment_karma: '$test.data.comment_karma',
+            user_created: '$test.data.created',
+            user_is_gold: '$test.data.is_gold',
+            user_is_mod: '$test.data.is_mod',
+            user_link_karma: '$test.data.link_karma',
+            user_verified: '$test.data.verified'
+        }
+    },
+    { $out : "reddit_new_users_merged2" }
+])

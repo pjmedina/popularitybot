@@ -52,7 +52,7 @@ def scrape_reddit(subreddit, post_count: int=100, after: str=None, limit: int=10
         raise ValueError("Sleep time range = [2, 4]")
     pages = int(math.ceil(post_count / limit))
 
-    first_iteration = False
+    first_iteration = True
     for _ in range(pages):
         if not first_iteration and after is None:
             raise RuntimeError("Seen a None 'after' after the first iteration. Re-reading data.")

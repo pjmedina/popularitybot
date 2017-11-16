@@ -1,0 +1,57 @@
+db.getCollection('reddit_post_user_vision_trimmed_almost').aggregate([
+    // each Object is an aggregation.
+    {
+        $group: {
+            _id: '$_id',
+            post_created: {$first: '$post_created'},
+            post_domain: {$first: '$post_domain'},
+            post_downs: {$first: '$post_downs'},
+            post_gilded: {$first: '$post_gilded'},
+            post_hide_score: {$first: '$post_hide_score'},
+            post_is_reddit_media_domain: {$first: '$post_is_reddit_media_domain'},
+            post_num_comments: {$first: '$post_num_comments'},
+            post_num_crossposts: {$first: '$post_num_crossposts'},
+            post_ops: {$first: '$post_ops'},
+            post_over_18: {$first: '$post_over_18'},
+            post_score: {$first: '$post_score'},
+            post_time_collected: {$first: '$post_time_collected'},
+            user_comment_karma: {$first: '$user_comment_karma'},
+            user_created: {$first: '$user_created'},
+            user_is_gold: {$first: '$user_is_gold'},
+            user_is_mod: {$first: '$user_is_mod'},
+            user_link_karma: {$first: '$user_link_karma'},
+            user_verified: {$first: '$user_verified'},
+            vision_full_text: {$first: '$vision_full_text'},
+            vision_blue: {$first: '$vision_dominant_color.color.blue' },
+            vision_green: {$first: '$vision_dominant_color.color.green' },
+            vision_red: {$first: '$vision_dominant_color.color.red' }
+        }
+    }, {
+        $project: {
+            _id: '$_id',
+            post_created: '$post_created',
+            post_domain: '$post_domain',
+            post_downs: '$post_downs',
+            post_gilded: '$post_gilded',
+            post_hide_score: '$post_hide_score',
+            post_is_reddit_media_domain: '$post_is_reddit_media_domain',
+            post_num_comments: '$post_num_comments',
+            post_num_crossposts: '$post_num_crossposts',
+            post_ops: '$post_ops',
+            post_over_18: '$post_over_18',
+            post_score: '$post_score',
+            post_time_collected: '$post_time_collected',
+            user_comment_karma: '$user_comment_karma',
+            user_created: '$user_created',
+            user_is_gold: '$user_is_gold',
+            user_is_mod: '$user_is_mod',
+            user_link_karma: '$user_link_karma',
+            user_verified: '$user_verified',
+            vision_blue: '$vision_blue',
+            vision_green: '$vision_green',
+            vision_red: '$vision_red',
+            vision_text: '$vision_full_text'
+        }
+    },
+    { $out : "reddit_post_user_vision_trimmed" }
+], {allowDiskUse: true})
