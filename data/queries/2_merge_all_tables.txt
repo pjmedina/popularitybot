@@ -22,6 +22,7 @@ db.getCollection('reddit_new_user_merged').aggregate([
             post_ups: '$data.ups',
             post_over_18: '$data.over_18',
             post_score: '$data.score',
+            post_subreddit: '$data.subreddit',
             post_time_collected: '$time_collected',
             user_comment_karma: '$test.data.comment_karma',
             user_created: '$test.data.created',
