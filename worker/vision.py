@@ -95,15 +95,6 @@ class VisionApi(object):
                 merged_res = merged_response.get('responses')
                 for res_item in response.get('responses'):
                     merged_res.append(res_item)
-        # label_responses = []
-
-        # for r in response['responses']:
-        #     labels = [
-        #         x['description'] for x in r.get('labelAnnotations', [])]
-
-        #     label_responses.append(labels)
-
-        # return label_responses
         return merged_response
 
     def split(self, arr, size):
