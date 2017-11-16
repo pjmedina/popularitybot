@@ -1,4 +1,4 @@
-db.getCollection('reddit_new_users_merged').aggregate([
+db.getCollection('reddit_new_users_merged2').aggregate([
     {
         $lookup:
         {
