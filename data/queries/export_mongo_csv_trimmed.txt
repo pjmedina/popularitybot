@@ -1,0 +1,1 @@
+_id,post_created,post_domain,post_downs,post_gilded,post_hide_score,post_is_reddit_media_domain,post_num_comments,post_num_crossposts,post_ups,post_over_18,post_score,post_time_collected,user_comment_karma,user_created,user_is_gold,user_is_mod,user_link_karma,user_verified,vision_blue,vision_green,vision_red,vision_text

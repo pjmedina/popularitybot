@@ -1,0 +1,14 @@
+db.getCollection('reddit_new_jsons').aggregate([
+    {
+        $lookup:
+        {
+            from: "reddit_user_jsons",
+            localField: "data.author",
+            foreignField: "data.name",
+            as: "test"
+        }
+    },
+    {
+        $out: "reddit_new_user_merged"
+    }
+])

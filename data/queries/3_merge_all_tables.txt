@@ -1,0 +1,14 @@
+db.getCollection('reddit_new_users_merged2').aggregate([
+    {
+        $lookup:
+        {
+            from: "reddit_vision_info",
+            localField: "_id",
+            foreignField: "reddit_id",
+            as: "test"
+        }
+    },
+    {
+        $out: "reddit_new_user_vision_merged"
+    }
+])

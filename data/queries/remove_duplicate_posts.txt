@@ -1,0 +1,24 @@
+db.getCollection('reddit_new_jsons').aggregate([
+    // each Object is an aggregation.
+    {
+        $group: {
+            originalId: {$first: '$_id'}, // Hold onto original ID.
+            _id: '$data.id', // Set the unique identifier
+            data:  {$first: '$data'},
+            kind:  {$first: '$kind'},
+            time_collected: {$first: '$time_collected'}
+        }
+
+    }, {
+        // this receives the output from the first aggregation.
+        // So the (originally) non-unique 'id' field is now
+        // present as the _id field. We want to rename it.
+        $project:{
+            _id : '$originalId', // Restore original ID.
+            data : '$data',
+            kind : '$kind',
+            time_collected: '$time_collected'
+        }
+    },
+    { $out : "reddit_new_jsons_cleaned" }
+])
