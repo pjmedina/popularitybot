@@ -61,7 +61,7 @@ def main(subreddit: str, post_count: int, limit: int=None, after: str=None, log_
     storage = Storage()
 
     # scrape reddit
-    for scraped_info in reddit.scrape_reddit(subreddit="AdviceAnimals", post_count=post_count, after=after, limit=limit):
+    for scraped_info in reddit.scrape_reddit(subreddit=subreddit, post_count=post_count, after=after, limit=limit):
         if scraped_info is None:
             logging.critical("ScrapedInfo is None. Exiting.")
             sys.exit(2)
