@@ -8,8 +8,8 @@ class TestLanguage(unittest.TestCase):
         self.language = LanguageApi()
 
     def test_detect_vision_info(self):
-        res = self.language.detect_sentiment(["As University of Waterloo students, we hope to collect "
-                                              "insight through sentiment analysis in memes from Reddit."])
+        res = self.language.detect_sentiment("As University of Waterloo students, we hope to collect insight through sentiment analysis in memes from Reddit.")
+        print(res)
         self.assertIsNotNone(res)
         self.assertNotEqual(res, [])
 

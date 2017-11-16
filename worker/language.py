@@ -21,51 +21,15 @@ class LanguageApi(object):
             discoveryServiceUrl=DISCOVERY_URL)
 
     def detect_sentiment(self, text, max_results=10, num_retries=0):
-        """Uses the Vision API for label detection,
-        text detection, web detection, and image properties.
-        """
-        merged_response = None
-        split_text = self.split(text, 16)
-        for itext in split_text:
-            batch_request = []
-
-            for text in itext:
-                batch_request.append({
-                    {
-                        "document": {
-                          "type": "PLAIN_TEXT",
-                          "language": "en",
-                          "content": text
-                        },
-                        "encodingType": "UTF32",
-                    }
-                })
-            request = self.language.documents().analyzeSentiment(
-                body={'requests': batch_request})
-
-            response = request.execute()
-
-            time_collected = int(time())
-            # we don't need the bounding blocks, which take up a ton of space
-            try:
-                res = response.get('responses', [])
-                for r in res:
-                    r['time_collected'] = time_collected
-            except KeyError:
-                print("Key doesn't exist")
-            if merged_response is None:
-                merged_response = response
-            else:
-                merged_res = merged_response.get('responses')
-                for res_item in response.get('responses'):
-                    merged_res.append(res_item)
-        return merged_response
-
-    def split(self, arr, size):
-        arrs = []
-        while len(arr) > size:
-            pice = arr[:size]
-            arrs.append(pice)
-            arr = arr[size:]
-        arrs.append(arr)
-        return arrs
+        """Uses the Language API for senitment analysis."""
+        request = self.language.documents().analyzeSentiment(
+            body={
+                "document": {
+                    "type": "PLAIN_TEXT",
+                    "language": "en",
+                    "content": text
+                }
+            })
+        response = request.execute()
+        response['time_collected'] = int(time())
+        return response
