@@ -76,5 +76,3 @@ class Storage(object):
     def get_text_data(self):
         return self.db.reddit_post_title_and_content.find({})
 
-    def add_temp_language_info(self, language_result):
-        return self.db.language_temp.insert_one(language_result).inserted_id
