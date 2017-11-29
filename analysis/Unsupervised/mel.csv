@@ -1,0 +1,11 @@
+language_content_score,language_content_magnitude,language_title_score,language_title_magnitude,Hour in the day (EST),post_domain,post_gilded,post_hide_score,post_subreddit,post_is_reddit_media_domain,post_num_comments,post_num_crossposts,post_over_18,post_score,user_comment_karma,user_is_gold,user_is_mod,user_link_karma,user_verified,vision_blue,vision_green,vision_red,post_age
+0.4,0.6,0,0,21,m.imgur.com,0,FALSE,AdviceAnimals,FALSE,0,0,FALSE,0,6187,TRUE,FALSE,9105,FALSE,28,27,214,13
+0,0.2,0.1,0.1,15,i.imgur.com,0,FALSE,AdviceAnimals,FALSE,0,0,FALSE,0,25832,FALSE,TRUE,2171,TRUE,33,26,30,4
+-0.5,0,0,0,19,i.redd.it,0,FALSE,memes,TRUE,1,0,FALSE,0,82,FALSE,TRUE,548,FALSE,5,34,238,6
+-0.7,0.7,0.1,0.1,12,i.redd.it,0,FALSE,AdviceAnimals,TRUE,0,0,FALSE,0,129250,FALSE,FALSE,1745,FALSE,18,17,23,7
+0,0.7,0,0,17,i.redd.it,0,FALSE,AdviceAnimals,TRUE,6,0,FALSE,0,874,FALSE,FALSE,187,FALSE,130,121,121,7
+0.1,0.3,0.4,0.4,15,i.redd.it,0,FALSE,memes,TRUE,0,0,FALSE,0,17,FALSE,FALSE,113,FALSE,20,20,20,0
+0.1,0,0.1,0.1,15,youtu.be,0,FALSE,PrequelMemes,FALSE,0,0,FALSE,0,145,FALSE,TRUE,4584,FALSE,19,24,27,2
+-0.1,0.7,0.3,0.3,21,i.imgur.com,0,FALSE,AdviceAnimals,FALSE,2,0,FALSE,0,61310,FALSE,TRUE,39544,FALSE,15,16,18,8
+-0.6,0.8,0,0,0,media.makeameme.org,0,FALSE,AdviceAnimals,FALSE,8,0,FALSE,0,120846,FALSE,TRUE,61693,FALSE,50,45,47,8
+0,0.6,0,0,10,imgflip.com,0,FALSE,AdviceAnimals,FALSE,0,0,FALSE,0,3770,FALSE,FALSE,247,FALSE,18,17,23,12
